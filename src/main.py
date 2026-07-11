@@ -25,3 +25,25 @@ print(bubble_sort([1, 2, 3, 4, 5]))
 print(bubble_sort([2, 1, 3, 4, 5]))
 print(bubble_sort([5, 4, 3, 2, 1]))
 
+""" Sorts numbers in ascending order using insertion sort algorithm,
+it modifies the original list
+
+Args: elem_list (list)
+
+Returns: tuple[list,int] --> (insertion sort ordered list, number of comparisons) 
+"""
+def insertion_sort(elem_list):
+    n_comparisons = 0
+    for i in range(1,len(elem_list)):
+        for k in range(i, 0, -1):
+            n_comparisons+=1
+            if elem_list[k] < elem_list[k-1]:
+                elem_list[k], elem_list[k-1] = elem_list[k-1], elem_list[k]
+            else: break
+        
+    return elem_list, n_comparisons
+
+print(insertion_sort([1, 2, 3, 4, 5]))
+print(insertion_sort([2, 1, 3, 4, 5]))
+print(insertion_sort([5, 4, 3, 2, 1]))
+
