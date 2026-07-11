@@ -92,7 +92,7 @@ print(linear_search([4,2,2,6,3,5,1,5,3,2,5,6,6,2,2,5,6,2], 1))
 """ Search an element in a previous sorted list with a binary search algorithm.
 
 Args:
-    elem_list (list): List to search the item from
+    sorted_elem_list (list): List to search the item from
     item (item): Item  to search
 
 Returns:
@@ -117,3 +117,51 @@ def binary_search(sorted_elem_list, item):
     
 
 print(binary_search([2, 5, 8, 12, 16, 23, 38, 56, 72, 91], 16))
+
+""" Calculate the factorial of a number
+
+Args: num (int): Number to calculate factorial
+
+Returns: (int): Factorial of the number
+"""
+def factorial_recursive(num):
+    if num > 0: return num * factorial_recursive(num - 1)
+    return 1
+
+print(factorial_recursive(6))
+
+""" Calculate the nth fibonacci number of the succession
+
+Args: n_fib (int): Index of the fibbonacci succession number
+
+Returns: (int): Fibonacci nth number
+"""
+def fibonacci_recursive(n_fib):
+    if n_fib > 1: return fibonacci_recursive(n_fib - 1) + fibonacci_recursive(n_fib - 2)
+    elif n_fib == 1: return 1
+    else: return 0
+
+print(fibonacci_recursive(3))
+
+""" Search a value in a previous sorted list using recursive binary search
+
+Args: 
+    sorted_elem_list (list): List to search the item from
+    item (item): Item  to search
+
+Returns: 
+    int: index of the founded item (-1 if is not found)
+"""
+def binary_search_recursive(sorted_elem_list, item, left=0, right=None, ):
+    if not sorted_elem_list: return -1
+    if right is None: right = len(sorted_elem_list) - 1
+    if right < left: return -1
+    middle = int(left + (right - left) / 2)
+
+    if item == sorted_elem_list[middle]:
+        return middle
+    if item > sorted_elem_list[middle]:
+        return binary_search_recursive(sorted_elem_list, item, middle + 1, right)
+    else:
+        return binary_search_recursive(sorted_elem_list, item, left, middle - 1)
+    
