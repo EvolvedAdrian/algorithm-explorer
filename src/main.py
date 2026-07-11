@@ -88,3 +88,32 @@ def linear_search(elem_list, item):
     return -1, n_checks
 
 print(linear_search([4,2,2,6,3,5,1,5,3,2,5,6,6,2,2,5,6,2], 1))
+
+""" Search an element in a previous sorted list with a binary search algorithm.
+
+Args:
+    elem_list (list): List to search the item from
+    item (item): Item  to search
+
+Returns:
+    tuple[int, int]: (index of the founded item (-1 if is not found), number of comparisons)
+"""
+def binary_search(sorted_elem_list, item):
+    n_checks=0
+    if not sorted_elem_list: return -1, n_checks
+    left = 0
+    right = len(sorted_elem_list)-1
+    while True:
+        middle = int(left + (right - left) / 2)
+        n_checks+=1
+        if item == sorted_elem_list[middle]:
+            return middle, n_checks
+        if item > sorted_elem_list[middle]:
+            left = middle + 1
+        else: 
+            right = middle - 1
+
+        if right < left: return -1, n_checks
+    
+
+print(binary_search([2, 5, 8, 12, 16, 23, 38, 56, 72, 91], 16))
