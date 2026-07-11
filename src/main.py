@@ -1,5 +1,5 @@
-""" Sorts numbers in ascending order using bubble sort optimized algorithm,
-it modifies the original list
+""" Sorts numbers in ascending order using bubble sort optimized algorithm.
+It modifies the original list.
 
 Args: elem_list (list)
 
@@ -26,7 +26,7 @@ print(bubble_sort([2, 1, 3, 4, 5]))
 print(bubble_sort([5, 4, 3, 2, 1]))
 
 """ Sorts numbers in ascending order using insertion sort algorithm,
-it modifies the original list
+It modifies the original list.
 
 Args: elem_list (list)
 
@@ -47,3 +47,25 @@ print(insertion_sort([1, 2, 3, 4, 5]))
 print(insertion_sort([2, 1, 3, 4, 5]))
 print(insertion_sort([5, 4, 3, 2, 1]))
 
+
+""" Sorts numbers in ascending order using selection sort optimized algorithm.
+It modifies the original list.
+
+Args: elem_list (list)
+
+Returns: tuple[list,int] --> (selection sort ordered list, number of comparisons) 
+"""
+def selection_sort(elem_list):
+    n_comparisons = 0
+    for i in range(0,len(elem_list)):
+        pos_min_elem = i
+        for k in range(i+1,len(elem_list)):
+            n_comparisons += 1
+            if elem_list[k] < elem_list[pos_min_elem]:
+                pos_min_elem = k
+        elem_list[i], elem_list[pos_min_elem] = elem_list[pos_min_elem], elem_list[i]
+    
+    return elem_list, n_comparisons
+
+    
+print(selection_sort([2,1,5,2,3,4]))
