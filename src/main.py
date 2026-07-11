@@ -104,7 +104,7 @@ def binary_search(sorted_elem_list, item):
     left = 0
     right = len(sorted_elem_list)-1
     while True:
-        middle = int(left + (right - left) / 2)
+        middle = left + (right - left) // 2
         n_checks+=1
         if item == sorted_elem_list[middle]:
             return middle, n_checks
@@ -156,7 +156,7 @@ def binary_search_recursive(sorted_elem_list, item, left=0, right=None, ):
     if not sorted_elem_list: return -1
     if right is None: right = len(sorted_elem_list) - 1
     if right < left: return -1
-    middle = int(left + (right - left) / 2)
+    middle = left + (right - left) // 2
 
     if item == sorted_elem_list[middle]:
         return middle
