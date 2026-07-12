@@ -152,7 +152,7 @@ Args:
 Returns: 
     int: index of the founded item (-1 if is not found)
 """
-def binary_search_recursive(sorted_elem_list, item, left=0, right=None, ):
+def binary_search_recursive(sorted_elem_list, item, left=0, right=None):
     if not sorted_elem_list: return -1
     if right is None: right = len(sorted_elem_list) - 1
     if right < left: return -1
@@ -164,4 +164,59 @@ def binary_search_recursive(sorted_elem_list, item, left=0, right=None, ):
         return binary_search_recursive(sorted_elem_list, item, middle + 1, right)
     else:
         return binary_search_recursive(sorted_elem_list, item, left, middle - 1)
+
+""" Merges to sorted lists in one sorted list in ascending order.
+It does not modify the original lists.
+
+Args:
+    left_list (list): First sorted list.
+    right_list (list): Second sorted list.
+
+Returns:
+    list: Unified sorted list.
+
+"""
+def merge(left_list, right_list):
+    merged_list = []
+    left_index = 0
+    right_index = 0
+
+    while left_index < len(left_list) and right_index < len(right_list):
+
+        left_list_num = left_list[left_index]
+        right_list_num = right_list[right_index]
+
+        if right_list_num <= left_list_num:
+            merged_list.append(right_list_num)
+            right_index+=1
+        else:
+            merged_list.append(left_list_num)
+            left_index+=1
+
+    merged_list.extend(left_list[left_index:])
+    merged_list.extend(right_list[right_index:])
+    return merged_list
+
+""" Sort a list in an ascendant order using the merge sort algorithm
+It creates a copy of the original list.
+
+Args: 
+    elem_list (list): List to sort.
+
+Returns:
+    list: Sorted list.
+"""
+def merge_sort(elem_list):
+    if len(elem_list) <= 1: return elem_list
     
+    middle = len(elem_list) // 2
+    left_list = merge_sort(elem_list[:middle])
+    right_list = merge_sort(elem_list[middle:])
+
+    return merge(left_list, right_list)
+
+    
+mylist = [2,5,6,1,3,4]
+merge_sort(mylist)
+print(mylist)
+
