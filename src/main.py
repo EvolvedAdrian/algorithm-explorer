@@ -1,9 +1,11 @@
 """ Sorts numbers in ascending order using bubble sort optimized algorithm.
 It modifies the original list.
 
-Args: elem_list (list)
+Args: 
+    elem_list (list): List to sort.
 
-Returns: tuple[list,int] --> (bubble sort ordered list, number of comparisons) 
+Returns: 
+    tuple[list,int]: Sorted list, number of comparisons.
 """
 def bubble_sort(elem_list):
     # Optimizations
@@ -11,35 +13,49 @@ def bubble_sort(elem_list):
     ordered_numbers = 0
     # Metrics
     n_comparisons = 0
+
     while not array_sorted:
         array_sorted = True
+
+        # Each pass translates the biggest number to its final position (in the end).
+        # Skip the last "ordered_numbers" because they are already in their final position.
         for i in range(1, len(elem_list)-ordered_numbers):
             n_comparisons+=1
+
             if elem_list[i] < elem_list[i-1]:
                 array_sorted = False
                 elem_list[i], elem_list[i-1] = elem_list[i-1], elem_list[i]
+
         ordered_numbers+=1
+
     return elem_list, n_comparisons
 
 print(bubble_sort([1, 2, 3, 4, 5]))
 print(bubble_sort([2, 1, 3, 4, 5]))
 print(bubble_sort([5, 4, 3, 2, 1]))
 
-""" Sorts numbers in ascending order using insertion sort algorithm,
+""" Sorts numbers in ascending order using insertion sort algorithm.
 It modifies the original list.
 
-Args: elem_list (list)
+Args: 
+    elem_list (list): List to sort.
 
-Returns: tuple[list,int] --> (insertion sort ordered list, number of comparisons) 
+Returns: 
+    tuple[list,int]: Sorted list, number of comparisons.
 """
 def insertion_sort(elem_list):
     n_comparisons = 0
+
     for i in range(1,len(elem_list)):
         for k in range(i, 0, -1):
             n_comparisons+=1
+            
+            # Translate the smallest element to its correct position.
             if elem_list[k] < elem_list[k-1]:
                 elem_list[k], elem_list[k-1] = elem_list[k-1], elem_list[k]
-            else: break
+            else:
+                # When the current element is in its final position no more comparisons are needed.
+                break
         
     return elem_list, n_comparisons
 
@@ -51,19 +67,27 @@ print(insertion_sort([5, 4, 3, 2, 1]))
 """ Sorts numbers in ascending order using selection sort optimized algorithm.
 It modifies the original list.
 
-Args: elem_list (list)
+Args: 
+    elem_list (list): List to sort.
 
-Returns: tuple[list,int] --> (selection sort ordered list, number of comparisons) 
+Returns: 
+    tuple[list,int]: Sorted list, number of comparisons.
 """
 def selection_sort(elem_list):
     n_comparisons = 0
+
     for i in range(0,len(elem_list)):
-        pos_min_elem = i
+        min_index = i
+
+        # Find min_index for the next list items. 
         for k in range(i+1,len(elem_list)):
             n_comparisons += 1
-            if elem_list[k] < elem_list[pos_min_elem]:
-                pos_min_elem = k
-        elem_list[i], elem_list[pos_min_elem] = elem_list[pos_min_elem], elem_list[i]
+
+            if elem_list[k] < elem_list[min_index]:
+                min_index = k
+
+        # Place the smallest element in its final position.
+        elem_list[i], elem_list[min_index] = elem_list[min_index], elem_list[i]
     
     return elem_list, n_comparisons
 
@@ -73,18 +97,21 @@ print(selection_sort([2,1,5,2,3,4]))
 """ Finds an element from a list using a linear search algorithm.
 
 Args:
-    elem_list (list): List to search the item from
-    item (item): Item  to search
+    elem_list (list): List to search the item from.
+    item (item): Item  to search.
 
 Returns:
-    tuple[int, int]: (index of the founded item (-1 if is not found), number of comparisons)
+    tuple[int, int]: (index of the founded item (-1 if is not found), number of comparisons.
 """
 def linear_search(elem_list, item):
     n_checks=0
+
     for i, el in enumerate(elem_list):
         n_checks+=1
+
         if el == item:
             return i, n_checks
+        
     return -1, n_checks
 
 print(linear_search([4,2,2,6,3,5,1,5,3,2,5,6,6,2,2,5,6,2], 1))
@@ -92,20 +119,24 @@ print(linear_search([4,2,2,6,3,5,1,5,3,2,5,6,6,2,2,5,6,2], 1))
 """ Search an element in a previous sorted list with a binary search algorithm.
 
 Args:
-    sorted_elem_list (list): List to search the item from
-    item (item): Item  to search
+    sorted_elem_list (list): List to search the item from.
+    item (item): Item  to search.
 
 Returns:
-    tuple[int, int]: (index of the founded item (-1 if is not found), number of comparisons)
+    tuple[int, int]: Index of the founded item (-1 if is not found), number of comparisons.
 """
 def binary_search(sorted_elem_list, item):
     n_checks=0
-    if not sorted_elem_list: return -1, n_checks
+    if not sorted_elem_list: 
+        return -1, n_checks
     left = 0
     right = len(sorted_elem_list)-1
+
     while True:
         middle = left + (right - left) // 2
         n_checks+=1
+
+        # We keep adapting the searching window with left and right until middle == item to search
         if item == sorted_elem_list[middle]:
             return middle, n_checks
         if item > sorted_elem_list[middle]:
@@ -113,51 +144,64 @@ def binary_search(sorted_elem_list, item):
         else: 
             right = middle - 1
 
-        if right < left: return -1, n_checks
+        if right < left: 
+            return -1, n_checks
     
 
 print(binary_search([2, 5, 8, 12, 16, 23, 38, 56, 72, 91], 16))
 
-""" Calculate the factorial of a number
+""" Calculate the factorial of a number.
 
-Args: num (int): Number to calculate factorial
+Args: 
+    num (int): Number to calculate factorial.
 
-Returns: (int): Factorial of the number
+Returns: 
+    int: Factorial of the number.
 """
 def factorial_recursive(num):
-    if num > 0: return num * factorial_recursive(num - 1)
+    if num > 0: 
+        return num * factorial_recursive(num - 1)
     return 1
 
 print(factorial_recursive(6))
 
-""" Calculate the nth fibonacci number of the succession
+""" Calculate the nth fibonacci number of the succession.
 
-Args: n_fib (int): Index of the fibbonacci succession number
+Args: 
+    n_fib (int): Index of the fibbonacci succession number.
 
-Returns: (int): Fibonacci nth number
+Returns:
+    int: Fibonacci nth number.
 """
 def fibonacci_recursive(n_fib):
-    if n_fib > 1: return fibonacci_recursive(n_fib - 1) + fibonacci_recursive(n_fib - 2)
-    elif n_fib == 1: return 1
-    else: return 0
+    if n_fib > 1: 
+        return fibonacci_recursive(n_fib - 1) + fibonacci_recursive(n_fib - 2)
+    elif n_fib == 1: 
+        return 1
+    else: 
+        return 0
 
 print(fibonacci_recursive(3))
 
-""" Search a value in a previous sorted list using recursive binary search
+""" Search a value in a previous sorted list using recursive binary search.
 
 Args: 
-    sorted_elem_list (list): List to search the item from
-    item (item): Item  to search
+    sorted_elem_list (list): List to search the item from.
+    item (item): Item  to search.
 
 Returns: 
-    int: index of the founded item (-1 if is not found)
+    int: Index of the founded item (-1 if is not found).
 """
 def binary_search_recursive(sorted_elem_list, item, left=0, right=None):
-    if not sorted_elem_list: return -1
-    if right is None: right = len(sorted_elem_list) - 1
-    if right < left: return -1
+    if not sorted_elem_list: 
+        return -1
+    if right is None: 
+        right = len(sorted_elem_list) - 1
+    if right < left: 
+        return -1
     middle = left + (right - left) // 2
 
+    # Adapt the searching window recursively to the left and right to look for the element.
     if item == sorted_elem_list[middle]:
         return middle
     if item > sorted_elem_list[middle]:
@@ -186,6 +230,7 @@ def merge(left_list, right_list):
         left_list_num = left_list[left_index]
         right_list_num = right_list[right_index]
 
+        # Append the smallest element to the merged list.
         if right_list_num <= left_list_num:
             merged_list.append(right_list_num)
             right_index+=1
@@ -193,6 +238,7 @@ def merge(left_list, right_list):
             merged_list.append(left_list_num)
             left_index+=1
 
+    # Ensure to include rest of the numbers in the final list.
     merged_list.extend(left_list[left_index:])
     merged_list.extend(right_list[right_index:])
     return merged_list
@@ -207,9 +253,11 @@ Returns:
     list: Sorted list.
 """
 def merge_sort(elem_list):
-    if len(elem_list) <= 1: return elem_list
-    
+    if len(elem_list) <= 1:
+        return elem_list
     middle = len(elem_list) // 2
+    
+    # Divide the list recursively in left and right.
     left_list = merge_sort(elem_list[:middle])
     right_list = merge_sort(elem_list[middle:])
 
@@ -233,13 +281,16 @@ def quick_sort(elem_list):
     left_list = []
     right_list = []
 
+    # Partition elements around the pivot.
     for i, el in enumerate(elem_list):
+        # Avoid the pivot to be appended to the left or right list.
         if i == len(elem_list) - 1: 
             continue
         if el < pivot: 
             left_list.append(el)
         else: 
             right_list.append(el)
+
 
     left_list = quick_sort(left_list)
     right_list = quick_sort(right_list)
