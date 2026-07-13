@@ -8,7 +8,7 @@ Returns:
     list: Sorted list.
 """
 def quick_sort(elem_list):
-    if len(elem_list) <= 1: 
+    if len(elem_list) <= 1:
         return elem_list
 
     pivot = elem_list[-1]
@@ -18,13 +18,12 @@ def quick_sort(elem_list):
     # Partition elements around the pivot.
     for i, el in enumerate(elem_list):
         # Avoid the pivot to be appended to the left or right list.
-        if i == len(elem_list) - 1: 
+        if i == len(elem_list) - 1:
             continue
-        if el < pivot: 
+        if el < pivot:
             left_list.append(el)
-        else: 
+        else:
             right_list.append(el)
-
 
     left_list = quick_sort(left_list)
     right_list = quick_sort(right_list)
