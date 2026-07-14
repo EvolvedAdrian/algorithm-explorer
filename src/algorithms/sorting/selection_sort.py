@@ -1,20 +1,20 @@
-""" Sorts numbers in ascending order using selection sort optimized algorithm.
-It modifies the original list.
-
-Time complexity:
-    Best: O(n2)
-    Average: O(n2)
-    Worst: O(n2)
-
-Space complexity: O(1)
-
-Args:
-    elem_list (list): List to sort.
-
-Returns:
-    list: Sorted list.
-"""
 def selection_sort(elem_list):
+    """ Sorts numbers in ascending order using selection sort optimized algorithm.
+    It modifies the original list.
+
+    Time complexity:
+        Best: O(n2)
+        Average: O(n2)
+        Worst: O(n2)
+
+    Space complexity: O(1)
+
+    Args:
+        elem_list (list): List to sort.
+
+    Returns:
+        list: Sorted list.
+    """
     for i in range(0,len(elem_list)):
         min_num_index = i
 

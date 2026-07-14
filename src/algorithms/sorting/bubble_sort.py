@@ -1,20 +1,20 @@
-""" Sorts numbers in ascending order using bubble sort optimized algorithm.
-It modifies the original list.
-
-Time complexity:
-    Best: O(n)
-    Average: O(n2)
-    Worst: O(n2)
-
-Space complexity: O(1)
-
-Args:
-    elem_list (list): List to sort.
-
-Returns:
-    list: Sorted list.
-"""
 def bubble_sort(elem_list):
+    """ Sorts numbers in ascending order using bubble sort optimized algorithm.
+    It modifies the original list.
+
+    Time complexity:
+        Best: O(n)
+        Average: O(n2)
+        Worst: O(n2)
+
+    Space complexity: O(1)
+
+    Args:
+        elem_list (list): List to sort.
+
+    Returns:
+        list: Sorted list.
+    """
     # Optimizations
     array_sorted = False
     ordered_numbers = 0

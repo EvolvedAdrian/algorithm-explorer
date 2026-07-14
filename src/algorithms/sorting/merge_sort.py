@@ -1,22 +1,21 @@
-""" Merges two sorted lists in one sorted list in ascending order.
-It does not modify the original lists.
-
-Time complexity:
-    Best: O(n)
-    Average: O(n)
-    Worst: O(n)
-
-Space complexity: O(n)
-
-Args:
-    left_list (list): First sorted list.
-    right_list (list): Second sorted list.
-
-Returns:
-    list: Unified sorted list.
-
-"""
 def merge(left_list, right_list):
+    """ Merges two sorted lists in one sorted list in ascending order.
+    It does not modify the original lists.
+
+    Time complexity:
+        Best: O(n)
+        Average: O(n)
+        Worst: O(n)
+
+    Space complexity: O(n)
+
+    Args:
+        left_list (list): First sorted list.
+        right_list (list): Second sorted list.
+
+    Returns:
+        list: Unified sorted list.
+    """
     merged_list = []
     left_index = 0
     right_index = 0
@@ -39,23 +38,23 @@ def merge(left_list, right_list):
     merged_list.extend(right_list[right_index:])
     return merged_list
 
-""" Sort a list in ascending order using the merge sort algorithm.
-It creates a copy of the original list.
-
-Time complexity:
-    Best: O(n * logn)
-    Average: O(n * logn)
-    Worst: O(n * logn)
-
-Space complexity: O(n)
-
-Args: 
-    elem_list (list): List to sort.
-
-Returns:
-    list: Sorted list.
-"""
 def merge_sort(elem_list):
+    """ Sort a list in ascending order using the merge sort algorithm.
+    It creates a copy of the original list.
+
+    Time complexity:
+        Best: O(n * logn)
+        Average: O(n * logn)
+        Worst: O(n * logn)
+
+    Space complexity: O(n)
+
+    Args:
+        elem_list (list): List to sort.
+
+    Returns:
+        list: Sorted list.
+    """
     if len(elem_list) <= 1:
         return elem_list
     middle = len(elem_list) // 2

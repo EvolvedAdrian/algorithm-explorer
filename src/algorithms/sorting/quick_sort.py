@@ -1,20 +1,20 @@
-""" Sort a list in an ascendant order using the quick sort algorithm.
-It creates a copy of the original list.
-
-Time complexity:
-    Best: O(n * logn)
-    Average: O(n * logn)
-    Worst: O(n2)
-
-Space complexity: O(n)
-
-Args:
-    elem_list (list): List to sort.
-
-Returns:
-    list: Sorted list.
-"""
 def quick_sort(elem_list):
+    """ Sort a list in an ascendant order using the quick sort algorithm.
+    It creates a copy of the original list.
+
+    Time complexity:
+        Best: O(n * logn)
+        Average: O(n * logn)
+        Worst: O(n2)
+
+    Space complexity: O(n)
+
+    Args:
+        elem_list (list): List to sort.
+
+    Returns:
+        list: Sorted list.
+    """
     if len(elem_list) <= 1:
         return elem_list
 

@@ -1,20 +1,20 @@
-""" Search an element in a previous sorted list with a binary search algorithm.
-
-Time complexity:
-    Best: O(1)
-    Average: O(log n)
-    Worst: O(log n)
-
-Space complexity: O(1)
-
-Args:
-    sorted_elem_list (list): List to search the item from.
-    item (item): Item  to search.
-
-Returns:
-    int: Index of the founded item (-1 if is not found).
-"""
 def binary_search(sorted_elem_list, item):
+    """ Search an element in a previous sorted list with a binary search algorithm.
+
+    Time complexity:
+        Best: O(1)
+        Average: O(log n)
+        Worst: O(log n)
+
+    Space complexity: O(1)
+
+    Args:
+        sorted_elem_list (list): List to search the item from.
+        item (item): Item  to search.
+
+    Returns:
+        int: Index of the founded item (-1 if is not found).
+    """
     if not sorted_elem_list:
         return -1
     left = 0

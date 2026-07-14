@@ -1,20 +1,20 @@
-""" Sorts numbers in ascending order using insertion sort algorithm.
-It modifies the original list.
-
-Time complexity:
-    Best: O(n)
-    Average: O(n2)
-    Worst: O(n2)
-
-Space complexity: O(1)
-
-Args:
-    elem_list (list): List to sort.
-
-Returns:
-    list: Sorted list.
-"""
 def insertion_sort(elem_list):
+    """ Sorts numbers in ascending order using insertion sort algorithm.
+    It modifies the original list.
+
+    Time complexity:
+        Best: O(n)
+        Average: O(n2)
+        Worst: O(n2)
+
+    Space complexity: O(1)
+
+    Args:
+        elem_list (list): List to sort.
+
+    Returns:
+        list: Sorted list.
+    """
     for i in range(1,len(elem_list)):
         for k in range(i, 0, -1):
             # Translate the smallest element to its correct position.

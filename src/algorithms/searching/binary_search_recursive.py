@@ -1,21 +1,21 @@
-""" Search a value in a previous sorted list using recursive binary search.
-
-Time complexity:
-    Best: O(1)
-    Average: O(log n)
-    Worst: O(log n)
-
-Space complexity: O(log n)
-
-Args: 
-    sorted_elem_list (list): List to search the item from.
-    item (item): Item  to search.
-
-Returns: 
-    int: Index of the founded item (-1 if is not found).
-"""
 def binary_search_recursive(sorted_elem_list, item, left=0, right=None):
-    if not sorted_elem_list: 
+    """ Search a value in a previous sorted list using recursive binary search.
+
+    Time complexity:
+        Best: O(1)
+        Average: O(log n)
+        Worst: O(log n)
+
+    Space complexity: O(log n)
+
+    Args:
+        sorted_elem_list (list): List to search the item from.
+        item (item): Item  to search.
+
+    Returns:
+        int: Index of the founded item (-1 if is not found).
+    """
+    if not sorted_elem_list:
         return -1
     if right is None: 
         right = len(sorted_elem_list) - 1
