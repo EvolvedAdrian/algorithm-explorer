@@ -1,34 +1,48 @@
-from algorithms.sorting.bubble_sort import bubble_sort
-from algorithms.sorting.insertion_sort import insertion_sort
-from algorithms.sorting.merge_sort import merge_sort
-from algorithms.sorting.quick_sort import quick_sort
-from algorithms.sorting.selection_sort import selection_sort
-from algorithms.searching.binary_search import binary_search
-from algorithms.searching.binary_search_recursive import binary_search_recursive
-from algorithms.searching.linear_search import linear_search
-from benchmark import get_test_arrays, benchmark_algorithm, format_time
+from benchmark import prepare_sorting_benchmark
+from benchmark import prepare_searching_benchmark
+from benchmark import prepare_mathematics_benchmark
+import subprocess
+import os
 
-array_sizes = [50, 500, 2000, 7000, 15000]
-test_arrays = get_test_arrays(array_sizes)
-sorting_algorithms = [
-    ("bubble sort", bubble_sort),
-    ("insertion sort", insertion_sort),
-    ("selection sort", selection_sort),
-    ("merge sort", merge_sort),
-    ("quick sort", quick_sort)
-]
-searching_algorithms = [binary_search, binary_search_recursive, linear_search]
+def clear_console():
+    subprocess.call("clear" if os.name == 'nt' else 'clear', shell=True)
 
-print("="*50)
-print("\nSORTING BENCHMARK --> Time measurement")
-print("="*50)
+def select_option(valid_options):
+    while True:
+        option = int(input("Select an option: "))
+        if option in valid_options: 
+            return option
+        else:
+            return None
 
-for i, test_array in enumerate(test_arrays):
-    print(f"\nArray size: {array_sizes[i]}\n")
-    print(f"{'Algorithm':<20}Time")
-    print("-"*30)
+def main():
+    while True:
+        clear_console()
+        print("=" * 50)
+        print("Algorithms explorer")
+        print("=" * 50, "\n")
+        print("1. Sorting algorithms")
+        print("2. Searching algorithms")
+        print("3. Mathematic algorithms")
+        print("4. Exit")
 
-    for name, algorithm in sorting_algorithms:
-        benchmark_result = benchmark_algorithm(algorithm, test_array.copy())
-        if not isinstance(benchmark_result, str): benchmark_result = format_time(benchmark_result)
-        print(f"{name.capitalize():<20}{benchmark_result}")
+        valid_options = list(range(1,5))
+        option = select_option(valid_options)
+        if option is None: 
+            continue
+        
+        match option:
+            case 1:
+                prepare_sorting_benchmark()
+            case 2:
+                prepare_searching_benchmark()
+            case 3:
+                prepare_mathematics_benchmark()
+            case 4:
+                exit()
+            case _:
+                pass
+
+main()
+
+
