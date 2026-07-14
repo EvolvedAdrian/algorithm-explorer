@@ -1,5 +1,12 @@
 """ Search a value in a previous sorted list using recursive binary search.
 
+Time complexity:
+    Best: O(1)
+    Average: O(log n)
+    Worst: O(log n)
+
+Space complexity: O(log n)
+
 Args: 
     sorted_elem_list (list): List to search the item from.
     item (item): Item  to search.

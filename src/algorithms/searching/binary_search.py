@@ -1,5 +1,12 @@
 """ Search an element in a previous sorted list with a binary search algorithm.
 
+Time complexity:
+    Best: O(1)
+    Average: O(log n)
+    Worst: O(log n)
+
+Space complexity: O(1)
+
 Args:
     sorted_elem_list (list): List to search the item from.
     item (item): Item  to search.
