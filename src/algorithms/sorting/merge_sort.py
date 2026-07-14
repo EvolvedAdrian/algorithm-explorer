@@ -1,5 +1,12 @@
-""" Merges to sorted lists in one sorted list in ascending order.
+""" Merges two sorted lists in one sorted list in ascending order.
 It does not modify the original lists.
+
+Time complexity:
+    Best: O(n)
+    Average: O(n)
+    Worst: O(n)
+
+Space complexity: O(n)
 
 Args:
     left_list (list): First sorted list.
@@ -32,8 +39,15 @@ def merge(left_list, right_list):
     merged_list.extend(right_list[right_index:])
     return merged_list
 
-""" Sort a list in an ascendant order using the merge sort algorithm
+""" Sort a list in ascending order using the merge sort algorithm.
 It creates a copy of the original list.
+
+Time complexity:
+    Best: O(n * logn)
+    Average: O(n * logn)
+    Worst: O(n * logn)
+
+Space complexity: O(n)
 
 Args: 
     elem_list (list): List to sort.
