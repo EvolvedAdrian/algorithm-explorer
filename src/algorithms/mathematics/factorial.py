@@ -1,5 +1,12 @@
 """ Calculate the factorial of a number.
 
+Time complexity:
+    Best: O(1)
+    Average: O(n)
+    Worst: O(n)
+
+Space complexity: O(n)
+
 Args: 
     num (int): Number to calculate factorial.
 

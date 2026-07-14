@@ -1,5 +1,12 @@
 """ Calculate the nth fibonacci number of the succession.
 
+Time complexity:
+    Best: O(1)
+    Average: O(2n)
+    Worst: O(2n)
+
+Space complexity: O(n)
+
 Args: 
     n_fib (int): Index of the fibbonacci succession number.
 
