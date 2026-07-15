@@ -47,26 +47,26 @@ def benchmark_algorithm(algorithm, *args):
     end = time.perf_counter()
     return end - start
 
-def format_time(num):
+def format_time(seconds):
     """ Converts a time in seconds to a human-readable format. 
 
     Args:
-        num (float): Time in seconds to convert.
+        seconds (float): Time in seconds to convert.
 
     Returns:
         str: Time formated.
     """
     unit_index = 0
 
-    while num < 1 and unit_index < len(TIME_UNITS):
-        num*=1000
+    while seconds < 1 and unit_index < len(TIME_UNITS) - 1:
+        seconds*=1000
         unit_index+=1
 
-    return f"{round(num, 2)} {TIME_UNITS[unit_index]}"
+    return f"{round(seconds, 2)} {TIME_UNITS[unit_index]}"
 
 def print_benchmark_header(title):
     print("="*50)
-    print(f"\n{title} BENCHMARK")
+    print(f"{title} BENCHMARK")
     print("="*50)
 
 def launch_benchmark(algorithms_list, *args):
@@ -79,24 +79,25 @@ def launch_benchmark(algorithms_list, *args):
             benchmark_result = format_time(benchmark_algorithm(algorithm, *copied_args))
         except RecursionError:
             benchmark_result = "ERROR: Maximum recursion depth exceeded."
-        print(f"{name.capitalize():<20}{benchmark_result}")
+        print(f"{name:<30}{benchmark_result}")
 
 def prepare_sorting_benchmark():
     test_arrays = generate_test_arrays()
     algorithms_list = [
-        ("bubble sort", bubble_sort),
-        ("insertion sort", insertion_sort),
-        ("selection sort", selection_sort),
-        ("merge sort", merge_sort),
-        ("quick sort", quick_sort)
+        ("Bubble sort", bubble_sort),
+        ("Insertion sort", insertion_sort),
+        ("Selection sort", selection_sort),
+        ("Merge sort", merge_sort),
+        ("Quick sort", quick_sort)
     ]
 
     print_benchmark_header("SORTING")
 
-    for test_array in test_arrays:
-        print(f"\nList size: {len(test_array)}\n")
-        print(f"{'Algorithm':<20}Time")
-        print("-"*30)
+    for i, test_array in enumerate(test_arrays):
+        print(f"\n\nBENCHMARK {i + 1}")
+        print(f"--> List size: {len(test_array)}")
+        print(f"\n{'Algorithm':<30}Time")
+        print("-"*40)
 
         launch_benchmark(algorithms_list, test_array)
         
@@ -104,33 +105,36 @@ def prepare_searching_benchmark():
     test_arrays = generate_test_arrays()
     numbers_to_find = [random.randint(0,9) for _ in range(len(test_arrays))]
     algorithms_list = [
-        ("binary_search", binary_search),
-        ("binary_search_recursive", binary_search_recursive),
-        ("linear_search", linear_search)
+        ("Binary search", binary_search),
+        ("Binary search recursive", binary_search_recursive),
+        ("Linear search", linear_search)
     ]
 
     print_benchmark_header("SEARCHING")
 
-    for test_array, number_to_find in zip(test_arrays, numbers_to_find):
+    for i, (test_array, number_to_find) in enumerate(zip(test_arrays, numbers_to_find)):
         sorted_array = sorted(test_array)
-        print(f"\nList size: {len(test_array)} Number to find: {number_to_find}\n")
-        print(f"{'Algorithm':<20}Time")
-        print("-"*30)
+        print(f"\n\nBENCHMARK {i + 1}")
+        print(f"--> List size: {len(test_array)}")
+        print(f"--> Number to find: {number_to_find}")
+        print(f"\n{'Algorithm':<30}Time")
+        print("-"*40)
 
         launch_benchmark(algorithms_list, sorted_array, number_to_find)
 
 def prepare_mathematics_benchmark():
     algorithms_list = [
-        ("factorial", factorial_recursive),
-        ("fibonacci_cached", fibonacci_cached),
-        ("fibonacci_recursive", fibonacci_recursive)
+        ("Factorial", factorial_recursive),
+        ("Fibonacci cached", fibonacci_cached),
+        ("Fibonacci recursive", fibonacci_recursive)
     ]
 
     print_benchmark_header("MATHEMATICS")
 
-    for test_num in TEST_NUMS:
-        print(f"\nNumber: {test_num}\n")
-        print(f"{'Algorithm':<20}Time")
-        print("-"*30)
+    for i, test_num in enumerate(TEST_NUMS):
+        print(f"\n\nBENCHMARK {i + 1}")
+        print(f"--> Number: {test_num}")
+        print(f"\n{'Algorithm':<30}Time")
+        print("-"*40)
 
         launch_benchmark(algorithms_list, test_num)

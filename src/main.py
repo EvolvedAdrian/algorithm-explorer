@@ -31,6 +31,7 @@ def main():
         if option is None: 
             continue
         
+        clear_console()
         match option:
             case 1:
                 prepare_sorting_benchmark()
@@ -42,6 +43,8 @@ def main():
                 exit()
             case _:
                 pass
+        
+        input("\n---\nPress any key to continue...")
 
 main()
 
