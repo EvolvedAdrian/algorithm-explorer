@@ -13,6 +13,11 @@ import random
 import time
 
 def get_test_arrays():
+    """ Defines a list of tests lists of different sizes for some algorithms benchmark.
+
+    Returns:
+        list[list]: List of test lists.
+    """
     array_sizes = [50, 500, 2000, 7000, 15000]
     test_arrays = []
     for size in array_sizes:
@@ -21,6 +26,15 @@ def get_test_arrays():
     return test_arrays
 
 def benchmark_algorithm(algorithm, *args):
+    """ Measure the execution time of a callable.
+
+    Args:
+        algorithm (callable): Function to benchmark.
+        *args (tuple): Parameters of the function.
+
+    Returns:
+        float: Execution time
+    """
     try:
         start = time.perf_counter()
         algorithm(*args)
@@ -30,6 +44,14 @@ def benchmark_algorithm(algorithm, *args):
         return "ERROR: Max recursion depth exceeded"
 
 def format_time(num):
+    """ Converts a time in seconds to a human-readable format. 
+
+    Args:
+        num (float): Time in seconds to convert.
+
+    Returns:
+        str: Time formated.
+    """
     unit_index_counter = 0
     unit_list = ["s", "ms", "µs", "ns"]
 
@@ -44,6 +66,7 @@ def print_benchmark_header(title):
     print(f"\n{title} BENCHMARK")
     print("="*50)
 
+# SORTING
 def prepare_sorting_benchmark():
     test_arrays = get_test_arrays()
     algorithms_list = [
@@ -57,6 +80,18 @@ def prepare_sorting_benchmark():
     print_benchmark_header("SORTING")
     launch_sorting_benchmark(test_arrays, algorithms_list)
 
+def launch_sorting_benchmark(test_arrays, algorithm_list):
+    for test_array in test_arrays:
+        print(f"\nList size: {len(test_array)}\n")
+        print(f"{'Algorithm':<20}Time")
+        print("-"*30)
+
+        for name, algorithm in algorithm_list:
+            benchmark_result = benchmark_algorithm(algorithm, test_array.copy())
+            if not isinstance(benchmark_result, str): benchmark_result = format_time(benchmark_result)
+            print(f"{name.capitalize():<20}{benchmark_result}")
+
+# SEARCHING
 def prepare_searching_benchmark():
     test_arrays = get_test_arrays()
     numbers_to_find = [random.randint(0,9) for _ in range(len(test_arrays))]
@@ -69,28 +104,6 @@ def prepare_searching_benchmark():
     print_benchmark_header("SEARCHING")
     launch_searching_benchmark(test_arrays, algorithms_list, numbers_to_find)
 
-def prepare_mathematics_benchmark():
-    test_nums = [10, 20, 30, 40]
-    algorithms_list = [
-        ("factorial", factorial_recursive),
-        ("fibonacci_cached", fibonacci_cached),
-        ("fibonacci_recursive", fibonacci_recursive)
-    ]
-
-    print_benchmark_header("MATHEMATICS")
-    launch_mathematics_benchmark(test_nums, algorithms_list)
-
-def launch_sorting_benchmark(test_arrays, algorithm_list):
-    for test_array in test_arrays:
-        print(f"\nList size: {len(test_array)}\n")
-        print(f"{'Algorithm':<20}Time")
-        print("-"*30)
-
-        for name, algorithm in algorithm_list:
-            benchmark_result = benchmark_algorithm(algorithm, test_array.copy())
-            if not isinstance(benchmark_result, str): benchmark_result = format_time(benchmark_result)
-            print(f"{name.capitalize():<20}{benchmark_result}")
-
 def launch_searching_benchmark(test_arrays, algorithm_list, numbers_to_find):
     for test_array, number_to_find in zip(test_arrays, numbers_to_find):
         sorted_array = sorted(test_array)
@@ -102,6 +115,18 @@ def launch_searching_benchmark(test_arrays, algorithm_list, numbers_to_find):
             benchmark_result = benchmark_algorithm(algorithm, sorted_array, number_to_find)
             if not isinstance(benchmark_result, str): benchmark_result = format_time(benchmark_result)
             print(f"{name.capitalize():<20}{benchmark_result}")
+
+# MATHEMATICS
+def prepare_mathematics_benchmark():
+    test_nums = [10, 20, 30, 40]
+    algorithms_list = [
+        ("factorial", factorial_recursive),
+        ("fibonacci_cached", fibonacci_cached),
+        ("fibonacci_recursive", fibonacci_recursive)
+    ]
+
+    print_benchmark_header("MATHEMATICS")
+    launch_mathematics_benchmark(test_nums, algorithms_list)
 
 def launch_mathematics_benchmark(test_nums, algorithm_list):
     for test_num in test_nums:
