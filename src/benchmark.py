@@ -12,15 +12,19 @@ from algorithms.mathematics.fibonacci_cached import fibonacci_cached
 import random
 import time
 
-def get_test_arrays():
+ARRAY_SIZES = [50, 500, 2000, 7000, 15000]
+TEST_NUMS = [10, 20, 30, 40]
+TIME_UNITS = ("s", "ms", "µs", "ns")
+
+
+def generate_test_arrays():
     """ Defines a list of tests lists of different sizes for some algorithms benchmark.
 
     Returns:
         list[list]: List of test lists.
     """
-    array_sizes = [50, 500, 2000, 7000, 15000]
     test_arrays = []
-    for size in array_sizes:
+    for size in ARRAY_SIZES:
         test_arrays.append([random.randint(0,10) for _ in range(size)])
     
     return test_arrays
@@ -34,14 +38,14 @@ def benchmark_algorithm(algorithm, *args):
 
     Returns:
         float: Execution time
+
+    Raises:
+        RecursionError: If the function exceeds the maximum recursion depth.
     """
-    try:
-        start = time.perf_counter()
-        algorithm(*args)
-        end = time.perf_counter()
-        return end - start
-    except RecursionError:
-        return "ERROR: Max recursion depth exceeded"
+    start = time.perf_counter()
+    algorithm(*args)
+    end = time.perf_counter()
+    return end - start
 
 def format_time(num):
     """ Converts a time in seconds to a human-readable format. 
@@ -52,23 +56,33 @@ def format_time(num):
     Returns:
         str: Time formated.
     """
-    unit_index_counter = 0
-    unit_list = ["s", "ms", "µs", "ns"]
+    unit_index = 0
 
-    while num < 1 and unit_index_counter < len(unit_list):
+    while num < 1 and unit_index < len(TIME_UNITS):
         num*=1000
-        unit_index_counter+=1
+        unit_index+=1
 
-    return f"{round(num, 2)} {unit_list[unit_index_counter]}"
+    return f"{round(num, 2)} {TIME_UNITS[unit_index]}"
 
 def print_benchmark_header(title):
     print("="*50)
     print(f"\n{title} BENCHMARK")
     print("="*50)
 
-# SORTING
+def launch_benchmark(algorithms_list, *args):
+    for name, algorithm in algorithms_list:
+        copied_args = [
+            arg.copy() if isinstance(arg, list) else arg 
+            for arg in args
+            ]
+        try:
+            benchmark_result = format_time(benchmark_algorithm(algorithm, *copied_args))
+        except RecursionError:
+            benchmark_result = "ERROR: Maximum recursion depth exceeded."
+        print(f"{name.capitalize():<20}{benchmark_result}")
+
 def prepare_sorting_benchmark():
-    test_arrays = get_test_arrays()
+    test_arrays = generate_test_arrays()
     algorithms_list = [
         ("bubble sort", bubble_sort),
         ("insertion sort", insertion_sort),
@@ -78,22 +92,16 @@ def prepare_sorting_benchmark():
     ]
 
     print_benchmark_header("SORTING")
-    launch_sorting_benchmark(test_arrays, algorithms_list)
 
-def launch_sorting_benchmark(test_arrays, algorithm_list):
     for test_array in test_arrays:
         print(f"\nList size: {len(test_array)}\n")
         print(f"{'Algorithm':<20}Time")
         print("-"*30)
 
-        for name, algorithm in algorithm_list:
-            benchmark_result = benchmark_algorithm(algorithm, test_array.copy())
-            if not isinstance(benchmark_result, str): benchmark_result = format_time(benchmark_result)
-            print(f"{name.capitalize():<20}{benchmark_result}")
-
-# SEARCHING
+        launch_benchmark(algorithms_list, test_array)
+        
 def prepare_searching_benchmark():
-    test_arrays = get_test_arrays()
+    test_arrays = generate_test_arrays()
     numbers_to_find = [random.randint(0,9) for _ in range(len(test_arrays))]
     algorithms_list = [
         ("binary_search", binary_search),
@@ -102,23 +110,16 @@ def prepare_searching_benchmark():
     ]
 
     print_benchmark_header("SEARCHING")
-    launch_searching_benchmark(test_arrays, algorithms_list, numbers_to_find)
 
-def launch_searching_benchmark(test_arrays, algorithm_list, numbers_to_find):
     for test_array, number_to_find in zip(test_arrays, numbers_to_find):
         sorted_array = sorted(test_array)
-        print(f"\nList size: {len(test_array)} | Number to find: {number_to_find}\n")
+        print(f"\nList size: {len(test_array)} Number to find: {number_to_find}\n")
         print(f"{'Algorithm':<20}Time")
         print("-"*30)
 
-        for name, algorithm in algorithm_list:
-            benchmark_result = benchmark_algorithm(algorithm, sorted_array, number_to_find)
-            if not isinstance(benchmark_result, str): benchmark_result = format_time(benchmark_result)
-            print(f"{name.capitalize():<20}{benchmark_result}")
+        launch_benchmark(algorithms_list, sorted_array, number_to_find)
 
-# MATHEMATICS
 def prepare_mathematics_benchmark():
-    test_nums = [10, 20, 30, 40]
     algorithms_list = [
         ("factorial", factorial_recursive),
         ("fibonacci_cached", fibonacci_cached),
@@ -126,16 +127,10 @@ def prepare_mathematics_benchmark():
     ]
 
     print_benchmark_header("MATHEMATICS")
-    launch_mathematics_benchmark(test_nums, algorithms_list)
 
-def launch_mathematics_benchmark(test_nums, algorithm_list):
-    for test_num in test_nums:
+    for test_num in TEST_NUMS:
         print(f"\nNumber: {test_num}\n")
         print(f"{'Algorithm':<20}Time")
         print("-"*30)
 
-        for name, algorithm in algorithm_list:
-            benchmark_result = benchmark_algorithm(algorithm, test_num)
-            if not isinstance(benchmark_result, str): benchmark_result = format_time(benchmark_result)
-            print(f"{name.capitalize():<20}{benchmark_result}")
-
+        launch_benchmark(algorithms_list, test_num)
