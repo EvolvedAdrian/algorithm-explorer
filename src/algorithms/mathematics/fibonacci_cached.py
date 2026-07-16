@@ -17,7 +17,14 @@ def fibonacci_cached(num):
 
     Returns:
         int: Fibonacci number.
+
+    Raises:
+        ValueError: If number is negative.
     """
-    if num <= 1:
+    if num < 0:
+        raise ValueError("Number must be greater or equal than 0.")
+    
+    if num in (0, 1):
         return num
+    
     return fibonacci_cached(num - 1) + fibonacci_cached(num - 2)

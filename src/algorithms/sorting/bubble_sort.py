@@ -4,8 +4,8 @@ def bubble_sort(elem_list):
 
     Time complexity:
         Best: O(n)
-        Average: O(n2)
-        Worst: O(n2)
+        Average: O(n^2)
+        Worst: O(n^2)
 
     Space complexity: O(1)
 

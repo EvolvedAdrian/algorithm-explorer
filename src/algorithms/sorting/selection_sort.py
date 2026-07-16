@@ -3,9 +3,9 @@ def selection_sort(elem_list):
     It modifies the original list.
 
     Time complexity:
-        Best: O(n2)
-        Average: O(n2)
-        Worst: O(n2)
+        Best: O(n^2)
+        Average: O(n^2)
+        Worst: O(n^2)
 
     Space complexity: O(1)
 

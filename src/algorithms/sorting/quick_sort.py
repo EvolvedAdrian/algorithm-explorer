@@ -5,7 +5,7 @@ def quick_sort(elem_list):
     Time complexity:
         Best: O(n * logn)
         Average: O(n * logn)
-        Worst: O(n2)
+        Worst: O(n^2)
 
     Space complexity: O(n)
 

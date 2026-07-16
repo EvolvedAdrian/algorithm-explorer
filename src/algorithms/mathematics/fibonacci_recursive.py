@@ -3,8 +3,8 @@ def fibonacci_recursive(n_fib):
 
     Time complexity:
         Best: O(1)
-        Average: O(2n)
-        Worst: O(2n)
+        Average: O(2^n)
+        Worst: O(2^n)
 
     Space complexity: O(n)
 
@@ -13,10 +13,14 @@ def fibonacci_recursive(n_fib):
 
     Returns:
         int: Fibonacci nth number.
+    
+    Raises:
+        ValueError: If number is negative.
     """
-    if n_fib > 1:
-        return fibonacci_recursive(n_fib - 1) + fibonacci_recursive(n_fib - 2)
-    elif n_fib == 1: 
-        return 1
-    else: 
-        return 0
+    if n_fib < 0:
+        raise ValueError("Number must be greater or equal than 0.")
+    
+    if n_fib in (0,1):
+        return n_fib
+
+    return fibonacci_recursive(n_fib - 1) + fibonacci_recursive(n_fib - 2)

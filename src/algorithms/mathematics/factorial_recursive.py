@@ -13,7 +13,14 @@ def factorial_recursive(num):
 
     Returns:
         int: Factorial of the number.
+
+    Raises:
+        ValueError: If number is negative.
     """
-    if num > 0:
-        return num * factorial_recursive(num - 1)
-    return 1
+    if num < 0:
+        raise ValueError("Number must be greater or equal than 0.")
+    
+    if num in (0, 1):
+        return 1
+    
+    return num * factorial_recursive(num - 1)
