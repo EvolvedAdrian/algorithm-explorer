@@ -27,7 +27,7 @@ class TestSortingAlgorithms(unittest.TestCase):
     def test_two_elements_unsorted_list(self):
         for algorithm in self.algorithms_list:
             with self.subTest(algorithm=algorithm.__name__):
-                self.assertEqual(algorithm([9,8]), [9,8])
+                self.assertEqual(algorithm([9,8]), [8,9])
     
     def test_repeated_elements_list(self):
         for algorithm in self.algorithms_list:
