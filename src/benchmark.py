@@ -58,11 +58,13 @@ def format_time(seconds):
     """
     unit_index = 0
 
-    while seconds < 1 and unit_index < len(TIME_UNITS) - 1:
+    while seconds > 0 and seconds < 1 and unit_index < len(TIME_UNITS) - 1:
         seconds*=1000
         unit_index+=1
 
-    return f"{round(seconds, 2)} {TIME_UNITS[unit_index]}"
+    value = round(seconds, 2)
+    
+    return f"{int(value) if value.is_integer() else value} {TIME_UNITS[unit_index]}"
 
 def print_benchmark_header(title):
     print("="*50)
