@@ -75,6 +75,8 @@ def launch_benchmark(algorithms_list, *args):
             arg.copy() if isinstance(arg, list) else arg 
             for arg in args
             ]
+        if algorithm is fibonacci_cached:
+            algorithm.cache_clear()
         try:
             benchmark_result = format_time(benchmark_algorithm(algorithm, *copied_args))
         except RecursionError:
