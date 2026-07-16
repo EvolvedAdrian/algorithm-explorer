@@ -5,7 +5,7 @@ import subprocess
 import os
 
 def clear_console():
-    subprocess.call("clear" if os.name == 'nt' else 'clear', shell=True)
+    subprocess.call("cls" if os.name == 'nt' else 'clear', shell=True)
 
 def select_option(valid_options):
     while True:
