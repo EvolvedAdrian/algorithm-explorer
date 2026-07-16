@@ -1,14 +1,14 @@
-from algorithms.sorting.bubble_sort import bubble_sort
-from algorithms.sorting.insertion_sort import insertion_sort
-from algorithms.sorting.merge_sort import merge_sort
-from algorithms.sorting.quick_sort import quick_sort
-from algorithms.sorting.selection_sort import selection_sort
-from algorithms.searching.binary_search import binary_search
-from algorithms.searching.binary_search_recursive import binary_search_recursive
-from algorithms.searching.linear_search import linear_search
-from algorithms.mathematics.factorial_recursive import factorial_recursive
-from algorithms.mathematics.fibonacci_recursive import fibonacci_recursive
-from algorithms.mathematics.fibonacci_cached import fibonacci_cached
+from src.algorithms.sorting.bubble_sort import bubble_sort
+from src.algorithms.sorting.insertion_sort import insertion_sort
+from src.algorithms.sorting.merge_sort import merge_sort
+from src.algorithms.sorting.quick_sort import quick_sort
+from src.algorithms.sorting.selection_sort import selection_sort
+from src.algorithms.searching.binary_search import binary_search
+from src.algorithms.searching.binary_search_recursive import binary_search_recursive
+from src.algorithms.searching.linear_search import linear_search
+from src.algorithms.mathematics.factorial_recursive import factorial_recursive
+from src.algorithms.mathematics.fibonacci_recursive import fibonacci_recursive
+from src.algorithms.mathematics.fibonacci_cached import fibonacci_cached
 import random
 import time
 

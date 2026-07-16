@@ -1,6 +1,6 @@
-from benchmark import prepare_sorting_benchmark
-from benchmark import prepare_searching_benchmark
-from benchmark import prepare_mathematics_benchmark
+from src.benchmark import prepare_sorting_benchmark
+from src.benchmark import prepare_searching_benchmark
+from src.benchmark import prepare_mathematics_benchmark
 import subprocess
 import os
 
